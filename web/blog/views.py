@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+from django.db.models import Q
+
 from .models import cursos_dictados
 # Create your views here.
 
@@ -11,6 +13,16 @@ def index(request):
 
 def cursos(request):
     #return HttpResponse('aca van los cursos de posgrado que dicte')
+
+    if request.method == "POST":
+
+        search = request.POST["search"]
+
+        if search !="":
+            cursos = cursos_dictados.objects.filter( Q(nombre__icontains=search) | Q(comision__icontains=search)).values()
+
+            return render(request, "blog/cursos.html", {"cursos":cursos, "search":True, "busqueda":search})
+  
 
     cursos = cursos_dictados.objects.all()
     ctx = {'cursos':cursos}

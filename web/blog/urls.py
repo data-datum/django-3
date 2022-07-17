@@ -6,8 +6,8 @@ from .views import *
 urlpatterns = [
     #URLs de la app
     #path('', inicio),
-    path('index/', index),
-    path('cursos/', cursos),
-    path('cv/', cv),
-    path('acerca/', acerca),
+    path('index/', index, name="index"),
+    path('cursos/', cursos, name="cursos"),
+    path('cv/', cv, name="cursos"),
+    path('acerca/', acerca, name="acerca"),
 ]
