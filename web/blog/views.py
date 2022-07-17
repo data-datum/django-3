@@ -6,16 +6,22 @@ from .models import cursos_dictados
 
 
 def index(request):
-    cursos = cursos_dictados.objects.all()
-    ctx = {'cursos':cursos}
-    return render(request, "blog/index.html", ctx)
+    
+    return render(request, "blog/index.html", {})
 
 def cursos(request):
-    return HttpResponse('aca van los cursos de posgrado que dicte')
+    #return HttpResponse('aca van los cursos de posgrado que dicte')
+
+    cursos = cursos_dictados.objects.all()
+    ctx = {'cursos':cursos}
+
+    return render(request, "blog/cursos.html", ctx)
 
 def cv(request):
-    return HttpResponse('aca va mi CV')
+    #return HttpResponse('aca va mi CV')
+    return render(request, "blog/cv.html", {})
 
 def acerca(request):
-    return HttpResponse('aca va info acerca de mi')
+    #return HttpResponse('aca va info acerca de mi')
+    return render(request, "blog/acerca.html", {})
 
