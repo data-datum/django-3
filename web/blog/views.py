@@ -3,7 +3,7 @@ from django.http import HttpResponse
 
 from django.db.models import Q
 
-from .models import cursos_dictados
+from .models import *
 # Create your views here.
 
 
