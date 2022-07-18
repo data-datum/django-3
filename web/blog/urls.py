@@ -10,4 +10,5 @@ urlpatterns = [
     path('cursos/', cursos, name="cursos"),
     path('cv/', cv, name="cursos"),
     path('acerca/', acerca, name="acerca"),
+    path('post/', post, name="post.html")
 ]

@@ -37,3 +37,7 @@ def acerca(request):
     #return HttpResponse('aca va info acerca de mi')
     return render(request, "blog/acerca.html", {})
 
+def post(request):
+
+    return render(request, "blog/post.html", {})
+
