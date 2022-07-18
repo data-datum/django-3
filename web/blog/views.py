@@ -31,7 +31,7 @@ def cursos(request):
 
 def agregar_curso(request):
 
-    return render(request, "blog/formulario_curso.html", {})
+    return render(request, "blog/agregar_curso.html", {})
 
 
 def cv(request):
