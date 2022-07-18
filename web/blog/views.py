@@ -29,6 +29,11 @@ def cursos(request):
 
     return render(request, "blog/cursos.html", ctx)
 
+def agregar_curso(request):
+
+    return render(request, "blog/formulario_curso.html", {})
+
+
 def cv(request):
     #return HttpResponse('aca va mi CV')
     return render(request, "blog/cv.html", {})
