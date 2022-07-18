@@ -19,19 +19,30 @@ def cursos(request):
         search = request.POST["search"]
 
         if search !="":
-            cursos = cursos_dictados.objects.filter( Q(nombre__icontains=search) | Q(comision__icontains=search)).values()
+            cursos = cursos.objects.filter( Q(nombre__icontains=search) | Q(comision__icontains=search)).values()
 
             return render(request, "blog/cursos.html", {"cursos":cursos, "search":True, "busqueda":search})
   
 
-    cursos = cursos_dictados.objects.all()
+    cursos = cursos.objects.all()
     ctx = {'cursos':cursos}
 
     return render(request, "blog/cursos.html", ctx)
 
 def agregar_curso(request):
 
-    return render(request, "blog/agregar_curso.html", {})
+    if request.method == "POST":
+
+        info_formulario = request.POST
+
+        curso = curso(info_formulario["nombre"], info_formulario["horas"], info_formulario["institucion"], info_formulario["anio"])
+
+        curso.save()
+
+        return render(request, "blog/agregar_curso.html", {})
+
+    else:
+        return render(request, "blog/agregar_curso.html", {})
 
 
 def cv(request):
