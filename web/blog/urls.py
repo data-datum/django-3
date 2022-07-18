@@ -8,7 +8,7 @@ urlpatterns = [
     #path('', inicio),
     path('index/', index, name="index"),
     path('cursos/', cursos, name="cursos"),
-    path('cv/', cv, name="cursos"),
+    path('cv/', cv, name="cv"),
     path('acerca/', acerca, name="acerca"),
     path('post/', post, name="post")
 ]
