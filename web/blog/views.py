@@ -1,9 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 from django.db.models import Q
 
 from .models import *
+from .forms import *
+
 # Create your views here.
 
 
@@ -25,9 +27,9 @@ def cursos(request):
   
 
     cursos = cursos_dictados.objects.all()
-    ctx = {'cursos':cursos}
+    #ctx = {'cursos':cursos}
 
-    return render(request, "blog/cursos.html", ctx)
+    return render(request, "blog/cursos.html", {"cursos":cursos})
 
 def agregar_curso(request):
 
@@ -44,6 +46,38 @@ def agregar_curso(request):
     else:
         return render(request, "blog/agregar_curso.html", {})
 
+def eliminar_curso(request, curso_id):
+
+    # post
+    curso = curso.objects.get(id=curso_id)
+    curso.delete()
+
+    return redirect("cursos")
+
+def editar_curso(request, curso_id):
+
+    # post
+    
+    curso = curso.objects.get(id=curso_id)
+
+    if request.method == "POST":
+
+        formulario = NuevoCurso(request.POST)
+
+        if formulario.is_valid():
+
+            info_curso = formulario.cleaned_data
+        
+            curso.curso = info_curso["curso"]
+            curso.anio = info_curso["anio"]
+            curso.save() # guardamos en la bd
+            
+            return redirect("cursos")
+
+            
+    formulario = NuevoCurso(initial={"nombre":curso.curso,"comision":curso.anio})
+
+    return render(request,"blog/agregar_curso.html",{"form":formulario,"accion":"Editar Curso"})
 
 def cv(request):
     #return HttpResponse('aca va mi CV')

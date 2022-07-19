@@ -67,13 +67,41 @@
                             </div>
                         </div>
                         <br>
-                        <h4>Resultados
+                        <h5>Resultados
                             {% if search %}
                                 para "{{busqueda}}":
                             {% else %}
                                 totales:
                             {% endif %}
-                        </h4>
+                        </h5>
+                        <br>
+                        <div class="row gx-5 justify-content-center">
+                            <div class="col-lg-10 table-responsive">
+                                <table class="table table-theme">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Curso</th>
+                                            <th scope="col">Año</th>
+                                            <th scope="col">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for curso in cursos_dictados %}
+                                            <tr>
+                                                <th scope="row">{{forloop.counter}}</th>
+                                                <td>{{curso.curso}}</td>
+                                                <td>{{curso.anio}}</td>
+                                                <td>
+                                                    <a href="{% url 'editar_curso' curso.id %}" class="text-primary badge badge-primary text-decoration-none"> <i class="bi bi-pencil-square"></i> Editar</a>
+                                                    <a href="{% url 'eliminar_curso' curso.id %}" class="text-danger badge badge-danger text-decoration-none"> <i class="bi bi-x-square"></i> Eliminar</a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
