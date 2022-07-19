@@ -6,12 +6,40 @@ from django.db.models import Q
 from .models import *
 from .forms import *
 
+from django.contrib.auth.forms import AuthenticationForm #formulario de autenticacion
+from django.contrib.auth import login, logout, authenticate
+
+
 # Create your views here.
 
 
 def index(request):
+
+    return render(request, "blog/index.html")
     
-    return render(request, "blog/index.html", {})
+
+def login_request(request):
+
+    if request.method == "POST":
+
+        form=AuthenticationForm(request, data=request.POST)
+
+        if form.is_valid():
+
+            username=form.cleaned_data.get("username")
+            password=form.cleaned_data.get("password")
+            user=authenticate(username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                return redirect("inicio")
+            else:
+                return redirect("login")
+    
+    form = AuthenticationForm()
+
+
+    return render (request, "blog/login.html",{"form":form})
 
 def cursos(request):
     #return HttpResponse('aca van los cursos de posgrado que dicte')

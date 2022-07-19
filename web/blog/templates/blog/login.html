@@ -1,0 +1,16 @@
+{% load static %}
+
+{% block tituloPagina %}
+
+Login - Blog Personal
+
+{% endblock %}
+
+{% block contenidoPagina %}
+    <form action="" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">Iniciar Sesión</button>
+
+    </form>
+{% endblock %}

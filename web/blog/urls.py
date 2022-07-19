@@ -7,6 +7,7 @@ urlpatterns = [
     #URLs de la app
     #path('', inicio),
     path('', index, name="index"),
+    path('login/', login_request, name="login"),
     path('cursos/', cursos, name="cursos"),
     path('agregar_curso/', agregar_curso, name="agregar_curso"),
     path('eliminar_curso/<curso_id>/', eliminar_curso, name="eliminar_curso"),
