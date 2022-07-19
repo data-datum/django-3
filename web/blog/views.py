@@ -6,7 +6,9 @@ from django.db.models import Q
 from .models import *
 from .forms import *
 
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
+#from django.contrib.auth.forms import UserCreationForm
+
 from django.contrib.auth import login, logout, authenticate
 
 
@@ -46,7 +48,8 @@ def register_request(request):
 
     if request.method == "POST":
 
-        form = UserCreationForm(request.POST)
+        #form = UserCreationForm(request.POST)
+        form = UserRegisterForm(request.POST)
 
         if form.is_valid():
 
@@ -65,10 +68,15 @@ def register_request(request):
 
         return render(request, "blog/register.html", {"form":form})
 
-    form = UserCreationForm()
+    #form = UserCreationForm()
+    form = UserRegisterForm(request.POST)
 
     return render(request, "blog/register.html", {"form":form})
 
+
+def logout_request(request):
+    logout(request)
+    return redirect("index")
 
 def cursos(request):
     #return HttpResponse('aca van los cursos de posgrado que dicte')
