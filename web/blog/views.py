@@ -6,7 +6,7 @@ from django.db.models import Q
 from .models import *
 from .forms import *
 
-from django.contrib.auth.forms import AuthenticationForm #formulario de autenticacion
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 
 
@@ -32,7 +32,7 @@ def login_request(request):
 
             if user is not None:
                 login(request, user)
-                return redirect("inicio")
+                return redirect("index")
             else:
                 return redirect("login")
     
@@ -40,6 +40,35 @@ def login_request(request):
 
 
     return render (request, "blog/login.html",{"form":form})
+
+
+def register_request(request):
+
+    if request.method == "POST":
+
+        form = UserCreationForm(request.POST)
+
+        if form.is_valid():
+
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1') #1er contraseña
+
+            form.save() #registramos el usuario 
+            #iniciamos la sesion
+            user=authenticate(username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                return redirect("index")
+            else:
+                return redirect("login")
+
+        return render(request, "blog/register.html", {"form":form})
+
+    form = UserCreationForm()
+
+    return render(request, "blog/register.html", {"form":form})
+
 
 def cursos(request):
     #return HttpResponse('aca van los cursos de posgrado que dicte')
