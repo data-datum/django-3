@@ -4,4 +4,16 @@ from django.contrib import admin
 
 from .models import *
 
-admin.site.register(cursos_dictados)
+class CursoAdmin(admin.ModelAdmin):
+
+    list_display = ('curso', 'anio')
+    search_fields = ('curso', 'anio')
+
+class WorkshopAdmin(admin.ModelAdmin):
+
+    list_display = ('workshop', 'anio')
+    search_fields = ('workshop', 'anio')
+
+
+admin.site.register(cursos_dictados, CursoAdmin)
+admin.site.register(workshops, WorkshopAdmin)
