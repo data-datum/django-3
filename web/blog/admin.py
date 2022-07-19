@@ -2,6 +2,6 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import cursos
+from .models import *
 
-admin.site.register(cursos)
+admin.site.register(cursos_dictados)
