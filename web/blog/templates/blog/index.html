@@ -34,7 +34,7 @@
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'post' %}">Post</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'cv' %}">CV</a></li>
                         {% if user.is_authenticated %}
-                            <li class="nav-item"><p class="nav-link px-lg-3 py-3 py-lg-1 mx-2">Hola, <b>{{user.username}}</b>!</p></li>
+                            <li class="nav-item"><p class="nav-link px-lg-3 py-3 py-lg-1 mx-2"><i class="bi bi-person-circle"></i> Hola, <b>{{user.username}}</b>!</p></li>
                             <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'logout' %}"> Cerrar Sesión</li>
                         {% else %}
                             <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'login' %}">Iniciar Sesión</a></li>
@@ -64,7 +64,7 @@
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <!-- Post preview-->
                     <div class="post-preview">
-                        <a href="post.html">
+                        <a href="{% url 'post' %}">
                             <h2 class="post-title">Man must explore, and this is exploration at its greatest</h2>
                             <h3 class="post-subtitle">Problems look mighty small from 150 miles up</h3>
                         </a>
@@ -78,7 +78,7 @@
                     <hr class="my-4" />
                     <!-- Post preview-->
                     <div class="post-preview">
-                        <a href="post.html"><h2 class="post-title">I believe every human has a finite number of heartbeats. I don't intend to waste any of mine.</h2></a>
+                        <a href="{% url 'post2' %}"><h2 class="post-title">I believe every human has a finite number of heartbeats. I don't intend to waste any of mine.</h2></a>
                         <p class="post-meta">
                             Posted by
                             <a href="#!">Start Bootstrap</a>
@@ -89,7 +89,7 @@
                     <hr class="my-4" />
                     <!-- Post preview-->
                     <div class="post-preview">
-                        <a href="post.html">
+                        <a href="{% url 'post3' %}">
                             <h2 class="post-title">Science has not yet mastered prophecy</h2>
                             <h3 class="post-subtitle">We predict too much for the next year and yet far too little for the next ten.</h3>
                         </a>
@@ -103,7 +103,7 @@
                     <hr class="my-4" />
                     <!-- Post preview-->
                     <div class="post-preview">
-                        <a href="post.html">
+                        <a href="{% url 'post4' %}">
                             <h2 class="post-title">Failure is not an option</h2>
                             <h3 class="post-subtitle">Many say exploration is part of our destiny, but it’s actually our duty to future generations.</h3>
                         </a>

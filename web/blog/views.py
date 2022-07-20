@@ -156,3 +156,14 @@ def post(request):
 
     return render(request, "blog/post.html", {})
 
+def post2(request):
+
+    return render(request, "blog/post2.html", {})
+
+def post3(request):
+
+    return render(request, "blog/post3.html", {})
+
+def post4(request):
+
+    return render(request, "blog/post4.html", {})

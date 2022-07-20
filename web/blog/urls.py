@@ -17,4 +17,7 @@ urlpatterns = [
     path('cv/', cv, name="cv"),
     path('acerca/', acerca, name="acerca"),
     path('post/', post, name="post"),
+    path('post2/', post2, name="post2"),
+    path('post3/', post3, name="post3"),
+    path('post4/', post4, name="post4"),
 ]
