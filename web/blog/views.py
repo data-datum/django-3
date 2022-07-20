@@ -95,27 +95,34 @@ def cursos(request):
 
     cursos = cursos_dictados.objects.all()
     #ctx = {'cursos':cursos}
+    
 
     return render(request, "blog/cursos.html", {"cursos":cursos})
+
 
 def agregar_curso(request):
 
     if request.method == "POST":
         formulario = NuevoCurso(request.POST)
+
         if formulario.is_valid():
 
             info_formulario=formulario.cleaned_data
 
-            cursos = cursos_dictados(curso=info_formulario["curso"],
-                                 horas=info_formulario["horas"], 
-                                 institucion=info_formulario["institucion"], 
-                                 anio=info_formulario["anio"])
+            cursos = cursos_dictados(curso=info_formulario["curso"],horas=info_formulario["horas"], institucion=info_formulario["institucion"], anio=info_formulario["anio"])
             cursos.save()
-        return render(request, "blog/agregar_curso.html", {})
+            return redirect("cursos")
 
-    else: #get
+        else: #get
         
-        return render(request, "blog/agregar_curso.html", {})
+            return render(request, "blog/agregar_curso.html", {"form":formulario,"accion":"Crear Curso"})
+    else:
+
+        formularioVacio=NuevoCurso()
+
+        return render(request, "blog/agregar_curso.html", {"form":formularioVacio,"accion":"Crear Curso"})
+
+
 
 def eliminar_curso(request, curso_id):
 
