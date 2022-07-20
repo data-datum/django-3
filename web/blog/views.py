@@ -101,22 +101,26 @@ def cursos(request):
 def agregar_curso(request):
 
     if request.method == "POST":
+        formulario = NuevoCurso(request.POST)
+        if formulario.is_valid():
 
-        info_formulario = request.POST
+            info_formulario=formulario.cleaned_data
 
-        cursos = cursos_dictados(curso=str(info_formulario["curso"]), horas=int(info_formulario["horas"]), institucion=str(info_formulario["institucion"]), anio=int(info_formulario["anio"]))
-
-        cursos.save()
-
+            cursos = cursos_dictados(curso=info_formulario["curso"],
+                                 horas=info_formulario["horas"], 
+                                 institucion=info_formulario["institucion"], 
+                                 anio=info_formulario["anio"])
+            cursos.save()
         return render(request, "blog/agregar_curso.html", {})
 
-    else:
+    else: #get
+        
         return render(request, "blog/agregar_curso.html", {})
 
 def eliminar_curso(request, curso_id):
 
     # post
-    curso = curso.objects.get(id=curso_id)
+    curso = cursos_dictados.objects.get(id=curso_id)
     curso.delete()
 
     return redirect("cursos")
@@ -125,7 +129,7 @@ def editar_curso(request, curso_id):
 
     # post
     
-    curso = curso.objects.get(id=curso_id)
+    curso = cursos_dictados.objects.get(id=curso_id)
 
     if request.method == "POST":
 
@@ -139,12 +143,33 @@ def editar_curso(request, curso_id):
             curso.anio = info_curso["anio"]
             curso.save() # guardamos en la bd
             
-            return redirect("cursos")
+            return redirect("blog/cursos")
 
             
-    formulario = NuevoCurso(initial={"nombre":curso.curso,"comision":curso.anio})
+    formulario = NuevoCurso(initial={"nombre":curso.curso,"anio":curso.anio})
 
     return render(request,"blog/agregar_curso.html",{"form":formulario,"accion":"Editar Curso"})
+
+
+def agregar_workshop(request):
+
+    if request.method == "POST":
+
+        info_formulario = request.POST
+
+        workshops = workshops(curso=info_formulario["curso"],
+                                 horas=info_formulario["horas"], 
+                                 congreso=info_formulario["congreso"], 
+                                 anio=info_formulario["anio"])
+
+        workshops.save()
+
+        return render(request, "blog/agregar_curso.html", {})
+
+    else:
+        return render(request, "blog/agregar_curso.html", {})
+
+
 
 def cv(request):
     #return HttpResponse('aca va mi CV')
