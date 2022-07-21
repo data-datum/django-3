@@ -11,8 +11,9 @@ from django.contrib.auth.forms import AuthenticationForm
 
 from django.contrib.auth import login, logout, authenticate
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-
+from django.contrib.admin.views.decorators import staff_member_required
 
 # Create your views here.
 
@@ -80,6 +81,36 @@ def logout_request(request):
     logout(request)
     return redirect("index")
 
+
+@login_required
+def editar_perfil(request):
+
+    user = request.user # usuario con el que estamos loggueados
+
+    if request.method == "POST":
+        
+        form = UserEditForm(request.POST) # cargamos datos llenados
+
+        if form.is_valid():
+
+            info = form.cleaned_data
+            user.email = info["email"]
+            user.first_name = info["first_name"]
+            user.last_name = info["last_name"]
+            # user.password = info["password1"]
+
+            user.save()
+
+            return redirect("index")
+
+
+    else:
+        form = UserEditForm(initial={"email":user.email, "first_name":user.first_name, "last_name":user.last_name})
+
+    return render(request,"blog/editar_perfil.html",{"form":form})
+
+
+@staff_member_required
 def cursos(request):
     #return HttpResponse('aca van los cursos de posgrado que dicte')
 
@@ -88,7 +119,7 @@ def cursos(request):
         search = request.POST["search"]
 
         if search !="":
-            cursos = cursos_dictados.objects.filter( Q(nombre__icontains=search) | Q(comision__icontains=search)).values()
+            cursos = cursos_dictados.objects.filter( Q(curso__icontains=search) | Q(horas__icontains=search)).values()
 
             return render(request, "blog/cursos.html", {"cursos":cursos, "search":True, "busqueda":search})
   
@@ -99,7 +130,7 @@ def cursos(request):
 
     return render(request, "blog/cursos.html", {"cursos":cursos})
 
-
+@staff_member_required
 def agregar_curso(request):
 
     if request.method == "POST":
@@ -123,7 +154,7 @@ def agregar_curso(request):
         return render(request, "blog/agregar_curso.html", {"form":formularioVacio,"accion":"Crear Curso"})
 
 
-
+@staff_member_required
 def eliminar_curso(request, curso_id):
 
     # post
@@ -132,6 +163,7 @@ def eliminar_curso(request, curso_id):
 
     return redirect("cursos")
 
+@staff_member_required
 def editar_curso(request, curso_id):
 
     # post
@@ -157,7 +189,7 @@ def editar_curso(request, curso_id):
 
     return render(request,"blog/agregar_curso.html",{"form":formulario,"accion":"Editar Curso"})
 
-
+@staff_member_required
 def agregar_workshop(request):
 
     if request.method == "POST":
