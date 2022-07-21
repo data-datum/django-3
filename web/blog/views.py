@@ -20,6 +20,14 @@ from django.contrib.admin.views.decorators import staff_member_required
 
 def index(request):
 
+    if request.user.is_authenticated:
+        try:
+            avatar = Avatar.objects.get(usuario=request.user)
+            url = avatar.image.url
+        except:
+            url = "/media/avatar/generica.jpg"
+        return render(request, "blog/index.html", {"url":url})
+    
     return render(request, "blog/index.html")
     
 

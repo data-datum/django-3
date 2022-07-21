@@ -34,7 +34,8 @@
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'post' %}">Post</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'cv' %}">CV</a></li>
                         {% if user.is_authenticated %}
-                            <li class="nav-item"><p class="nav-link px-lg-3 py-3 py-lg-1 mx-2"><i class="bi bi-person-circle"></i> Hola, <b>{{user.username}}</b>!</p></li>
+                            <img class="rounded" src="{{url}}" alt="" srcset="" style="height: 40px;">
+                            <li class="nav-item"><p class="nav-link px-lg-3 py-3 py-lg-0 mx-2"> Hola, <b>{{user.username}}</b>!</p></li>
                             <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'logout' %}"> Cerrar Sesión</li>
                         {% else %}
                             <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'login' %}">Iniciar Sesión</a></li>

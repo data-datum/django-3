@@ -17,3 +17,5 @@ class WorkshopAdmin(admin.ModelAdmin):
 
 admin.site.register(cursos_dictados, CursoAdmin)
 admin.site.register(workshops, WorkshopAdmin)
+
+admin.site.register(Avatar)
