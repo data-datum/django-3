@@ -228,20 +228,20 @@ def acerca(request):
 
 def posts(request):
 
-    return render(request, "blog/posts", {})
+    return render(request, "blog/posts.html", {})
 
 def post(request):
 
-    return render(request, "blog/posts/post.html", {})
+    return render(request, "blog/post.html", {})
 
 def post2(request):
 
-    return render(request, "blog/posts/post2.html", {})
+    return render(request, "blog/post2.html", {})
 
 def post3(request):
 
-    return render(request, "blog/posts/post3.html", {})
+    return render(request, "blog/post3.html", {})
 
 def post4(request):
 
-    return render(request, "blog/posts/post4.html", {})
+    return render(request, "blog/post4.html", {})
