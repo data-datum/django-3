@@ -17,8 +17,9 @@ urlpatterns = [
     path('editar_curso/<curso_id>/', editar_curso, name="editar_curso"),
     path('cv/', cv, name="cv"),
     path('acerca/', acerca, name="acerca"),
-    path('post/', post, name="post"),
-    path('post2/', post2, name="post2"),
-    path('post3/', post3, name="post3"),
-    path('post4/', post4, name="post4"),
+    path('posts/', posts, name="posts"),
+    path('posts/post', post, name="posts/post"),
+    path('posts/post2', post2, name="posts/post2"),
+    path('posts/post3', post3, name="posts/post3"),
+    path('posts/post4', post4, name="posts/post4"),
 ]

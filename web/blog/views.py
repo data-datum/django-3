@@ -118,7 +118,7 @@ def editar_perfil(request):
     return render(request,"blog/editar_perfil.html",{"form":form})
 
 
-@staff_member_required
+
 def cursos(request):
     #return HttpResponse('aca van los cursos de posgrado que dicte')
 
@@ -226,18 +226,22 @@ def acerca(request):
     #return HttpResponse('aca va info acerca de mi')
     return render(request, "blog/acerca.html", {})
 
+def posts(request):
+
+    return render(request, "blog/posts", {})
+
 def post(request):
 
-    return render(request, "blog/post.html", {})
+    return render(request, "blog/posts/post.html", {})
 
 def post2(request):
 
-    return render(request, "blog/post2.html", {})
+    return render(request, "blog/posts/post2.html", {})
 
 def post3(request):
 
-    return render(request, "blog/post3.html", {})
+    return render(request, "blog/posts/post3.html", {})
 
 def post4(request):
 
-    return render(request, "blog/post4.html", {})
+    return render(request, "blog/posts/post4.html", {})

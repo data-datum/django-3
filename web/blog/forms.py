@@ -1,8 +1,8 @@
-
 from pyexpat import model
-from django import forms
 from django.contrib.auth.forms import UserCreationForm
+from django import forms
 from django.contrib.auth.models import User
+
 
 
 class NuevoCurso(forms.Form):
@@ -45,4 +45,12 @@ class UserEditForm(UserCreationForm):
         fields = ['email', 'password1', 'password2', 'first_name', 'last_name']
 
         help_texts = {k:"" for k in fields}
+
+class UserEditForm2(forms.Form):
+
+    email = forms.EmailField(label="Email")
+    imagen = forms.ImageField(label="Imagen", required=False)
+
+    first_name = forms.CharField(label="Nombre")
+    last_name = forms.CharField(label="Apellido")
 
