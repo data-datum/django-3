@@ -94,10 +94,15 @@ def logout_request(request):
 def editar_perfil(request):
 
     user = request.user # usuario con el que estamos loggueados
+    try:
+        avatar = Avatar.objects.get(usuario=user)
+    except:
+        avatar = Avatar(usuario=user)
+        avatar.save()
 
     if request.method == "POST":
         
-        form = UserEditForm(request.POST) # cargamos datos llenados
+        form = UserEditForm2(request.POST, request.FILES) # cargamos datos llenados
 
         if form.is_valid():
 
@@ -105,18 +110,23 @@ def editar_perfil(request):
             user.email = info["email"]
             user.first_name = info["first_name"]
             user.last_name = info["last_name"]
-            # user.password = info["password1"]
 
             user.save()
 
+            if info['imagen'] != None:
+                avatar.imagen = info['imagen']
+                avatar.save()
+
             return redirect("index")
 
+        else:
+            print(form.errors)
+            return render(request, "blog/editar_perfil.html", {"form":form})
 
     else:
-        form = UserEditForm(initial={"email":user.email, "first_name":user.first_name, "last_name":user.last_name})
+        form = UserEditForm2(initial={"email":user.email, "first_name":user.first_name, "last_name":user.last_name, "imagen":avatar.imagen})
 
     return render(request,"blog/editar_perfil.html",{"form":form})
-
 
 
 def cursos(request):
@@ -171,31 +181,36 @@ def eliminar_curso(request, curso_id):
 
     return redirect("cursos")
 
-@staff_member_required
-def editar_curso(request, curso_id):
 
-    # post
-    
+@staff_member_required
+def editar_curso(request,curso_id):
+
     curso = cursos_dictados.objects.get(id=curso_id)
 
     if request.method == "POST":
-
         formulario = NuevoCurso(request.POST)
 
         if formulario.is_valid():
 
             info_curso = formulario.cleaned_data
-        
+
             curso.curso = info_curso["curso"]
+            curso.horas=info_curso["horas"]
+            curso.institucion=info_curso["institucion"]
             curso.anio = info_curso["anio"]
             curso.save() # guardamos en la bd
-            
-            return redirect("blog/cursos")
 
-            
-    formulario = NuevoCurso(initial={"nombre":curso.curso,"anio":curso.anio})
+            return redirect("cursos")
 
-    return render(request,"blog/agregar_curso.html",{"form":formulario,"accion":"Editar Curso"})
+
+    #get
+    formulario_vacio=NuevoCurso(initial={"nombre":curso.curso, 
+                                    "horas": curso.horas, 
+                                    "institucion":curso.institucion, 
+                                    "anio":curso.anio})
+    return render(request, "blog/agregar_curso.html", {"form": formulario_vacio})
+
+
 
 @staff_member_required
 def agregar_workshop(request):
@@ -225,6 +240,19 @@ def cv(request):
 def acerca(request):
     #return HttpResponse('aca va info acerca de mi')
     return render(request, "blog/acerca.html", {})
+
+def base(request):
+    
+    return render(request, "blog/base.html", {})
+
+def base2(request):
+    
+    return render(request, "blog/base2.html", {})
+
+def base4(request):
+    
+    return render(request, "blog/base4.html", {})
+  
 
 def posts(request):
 

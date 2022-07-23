@@ -6,8 +6,8 @@ from .models import *
 
 class CursoAdmin(admin.ModelAdmin):
 
-    list_display = ('curso', 'anio')
-    search_fields = ('curso', 'anio')
+    list_display = ('curso', 'institucion', 'horas', 'anio')
+    search_fields = ('curso', 'institucion', 'horas', 'anio')
 
 class WorkshopAdmin(admin.ModelAdmin):
 

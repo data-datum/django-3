@@ -13,6 +13,9 @@ class cursos_dictados(models.Model):
     def __str__(self) -> str:
         return f"Curso: {self.nombre} en {self.anio}"
 
+    class Meta:
+        verbose_name_plural = "Cursos Dictados"
+
 class workshops(models.Model):
     workshop = models.CharField("Nombre", max_length=200)
     horas = models.PositiveIntegerField("Horas")
@@ -22,6 +25,9 @@ class workshops(models.Model):
     def __str__(self) -> str:
         return f"Workshop: {self.nombre} en {self.anio}"
 
+    class Meta:
+        verbose_name_plural = "Workshops"
+
 
 # modelo del avatar
 class Avatar(models.Model):
@@ -29,3 +35,9 @@ class Avatar(models.Model):
     usuario = models.OneToOneField(User, on_delete=models.CASCADE)
 
     imagen = models.ImageField(upload_to='avatar/', blank=True, null=True)
+
+    def __str__(self) -> str:
+        return f"Usuario: {self.usuario}"
+
+    class Meta:
+        verbose_name_plural = "Avatar"

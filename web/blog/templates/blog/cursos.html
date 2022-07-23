@@ -34,9 +34,13 @@
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'posts' %}">Posts</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'cv' %}">CV</a></li>
                         {% if user.is_authenticated %}
-                            <img class="rounded" src="{{url}}" alt="" srcset="" style="height: 40px;">
-                            <li class="nav-item"><p class="nav-link px-lg-3 py-3 py-lg-0 mx-2"> Hola, <b>{{user.username}}</b>!</p></li>
-                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'logout' %}"> Cerrar Sesión</li>
+                            <!-- <img class="rounded" src="{{url}}" alt="" srcset="" style="height: 40px;"> -->
+                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'editar_perfil' %}">Editar Perfil</a></li>
+                                {% if user.avatar.imagen %}
+                                    <img src="{{user.avatar.imagen.url}}" alt="" style="height: 40px; width: auto;">
+                                {% endif%}
+                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="">Hola, {{user.username}}</a></li>
+                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'logout' %}"> Cerrar Sesión</a></li>
                         {% else %}
                             <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'login' %}">Iniciar Sesión</a></li>
                             <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'register' %}">Registrate</a></li>
@@ -90,6 +94,8 @@
                                         <tr>
                                             <th scope="col">#</th>
                                             <th scope="col">Curso</th>
+                                            <th scope="col">Institucion</th>
+                                            <th scope="col">Horas</th>
                                             <th scope="col">Año</th>
                                             <th scope="col">Acciones</th>
                                         </tr>
@@ -99,6 +105,8 @@
                                             <tr>
                                                 <th scope="row">{{forloop.counter}}</th>
                                                 <td>{{curso.curso}}</td>
+                                                <td>{{curso.institucion}}</td>
+                                                <td>{{curso.horas}}</td>
                                                 <td>{{curso.anio}}</td>
                                                 <td>
                                                     <a href="{% url 'editar_curso' curso.id %}" class="text-primary badge badge-primary text-decoration-none"> <i class="bi bi-pencil-square"></i> Editar</a>

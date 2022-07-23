@@ -31,8 +31,20 @@
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'index' %}">Inicio</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'acerca' %}">Acerca</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'cursos' %}">Cursos</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'posts' %}">Post</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'posts' %}">Posts</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'cv' %}">CV</a></li>
+                        {% if user.is_authenticated %}
+                            <!-- <img class="rounded" src="{{url}}" alt="" srcset="" style="height: 40px;"> -->
+                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'editar_perfil' %}">Editar Perfil</a></li>
+                                {% if user.avatar.imagen %}
+                                    <img src="{{user.avatar.imagen.url}}" alt="" style="height: 40px; width: auto;">
+                                {% endif%}
+                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="">Hola, {{user.username}}</a></li>
+                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'logout' %}"> Cerrar Sesión</a></li>
+                        {% else %}
+                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'login' %}">Iniciar Sesión</a></li>
+                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'register' %}">Registrate</a></li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
@@ -57,10 +69,10 @@
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <h2>Estás editando al usuario "{{user.username}}":</h2>
                         <p></p>
-                        <form action="" method="post">
+                        <form action="" method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                             {{form.as_p}}
-                            <button type="submit">Guardar</button>
+                            <input type="submit" class="btn btn-primary" value="Guardar cambio">
                         </form>
                     </div>
                 </div>

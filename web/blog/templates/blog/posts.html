@@ -34,9 +34,13 @@
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'posts' %}">Posts</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'cv' %}">CV</a></li>
                         {% if user.is_authenticated %}
-                            <img class="rounded" src="{{url}}" alt="" srcset="" style="height: 40px;">
-                            <li class="nav-item"><p class="nav-link px-lg-3 py-3 py-lg-0 mx-2"> Hola, <b>{{user.username}}</b>!</p></li>
-                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'logout' %}"> Cerrar Sesión</li>
+                            <!-- <img class="rounded" src="{{url}}" alt="" srcset="" style="height: 40px;"> -->
+                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'editar_perfil' %}">Editar Perfil</a></li>
+                                {% if user.avatar.imagen %}
+                                    <img src="{{user.avatar.imagen.url}}" alt="" style="height: 40px; width: auto;">
+                                {% endif%}
+                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="">Hola, {{user.username}}</a></li>
+                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'logout' %}"> Cerrar Sesión</a></li>
                         {% else %}
                             <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'login' %}">Iniciar Sesión</a></li>
                             <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'register' %}">Registrate</a></li>
@@ -51,9 +55,9 @@
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <div class="site-heading">
-                            <h1>Hola!</h1>
+                            <h1>Posteos</h1>
                             <h2></h2>
-                            <span class="subheading">Este es mi blog personal y en este sitio comparto información sobre ciencia de datos y aprendizaje automático</span>
+                            <span class="subheading">Ciencia de datos y Aprendizaje automático</span>
                         </div>
                     </div>
                 </div>
