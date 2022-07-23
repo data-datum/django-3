@@ -16,9 +16,9 @@ Para correr el proyecto
 
 Para realizar las migraciones
 
-`$ python3 manage.py migrate`
-
 `$ python3 manage.py makemigrations`
+
+`$ python3 manage.py migrate`
 
 Para crear superusuario
 
