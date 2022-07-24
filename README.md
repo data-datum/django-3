@@ -35,4 +35,18 @@ Para acceder al sitio, la url correspondiente
 `http://127.0.0.1:8000`
 
 
+### CRUD 
 
+En este proyecto se realiza un CRUD completo de 
+* Agregar cursos / Editar cursos / Eliminar cursos
+
+Además los usuarios, pueden:
+* Crear un usuario.
+* Agregar un Avatar / Cambiar su Avatar / Eliminar su Avatar. 
+
+
+## Pendientes
+
+* CRUD de agregar, editar, eliminar Posteos
+* CRUD de agregar, editar, eliminar Mensajes 
+* Deploy en Heroku
