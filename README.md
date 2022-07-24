@@ -35,6 +35,8 @@ Para acceder al sitio, la url correspondiente
 `http://127.0.0.1:8000`
 
 
+![inicio](index0.png)
+
 
 
 ### CRUD 
