@@ -46,7 +46,12 @@ En este proyecto se realiza un CRUD completo de
 
 Además los usuarios, pueden:
 * Crear un usuario.
-* Agregar un Avatar / Cambiar su Avatar / Eliminar su Avatar. 
+* Agregar un Avatar / Cambiar su Avatar / Eliminar su Avatar.
+
+#### Unit Test
+
+En este archivo se documentaron los casos de prueba. 
+https://docs.google.com/spreadsheets/d/1Kd3zvgiM9fL4QOvMLeIf8TuyHeS4hNBh-751MWGWyzo/edit#gid=0 
 
 
 #### Pendientes
