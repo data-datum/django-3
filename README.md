@@ -50,5 +50,5 @@ Además los usuarios, pueden:
 #### Pendientes
 
 * CRUD de agregar, editar, eliminar Posteos
-* CRUD de agregar, editar, eliminar Mensajes 
+* CRUD de agregar, editar, eliminar Mensajes a los Posteos
 * Deploy en Heroku
