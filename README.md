@@ -39,6 +39,7 @@ Para acceder al sitio, la url correspondiente
 
 
 
+
 ### CRUD 
 
 En este proyecto se realiza un CRUD completo de 
@@ -59,3 +60,8 @@ https://docs.google.com/spreadsheets/d/1Kd3zvgiM9fL4QOvMLeIf8TuyHeS4hNBh-751MWGW
 * CRUD de agregar, editar, eliminar Posteos
 * CRUD de agregar, editar, eliminar Mensajes a los Posteos
 * Deploy en Heroku
+
+
+## Video Presentación 
+
+https://youtu.be/vhMOSTqv9oU 
