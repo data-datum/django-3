@@ -35,6 +35,8 @@ Para acceder al sitio, la url correspondiente
 `http://127.0.0.1:8000`
 
 
+
+
 ### CRUD 
 
 En este proyecto se realiza un CRUD completo de 
@@ -45,7 +47,7 @@ Además los usuarios, pueden:
 * Agregar un Avatar / Cambiar su Avatar / Eliminar su Avatar. 
 
 
-## Pendientes
+#### Pendientes
 
 * CRUD de agregar, editar, eliminar Posteos
 * CRUD de agregar, editar, eliminar Mensajes 
