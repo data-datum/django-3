@@ -16,6 +16,14 @@ class NuevoWorkshop(forms.Form):
     horas = forms.IntegerField(min_value=0)
     congreso = forms.CharField(max_length=200, label="Congreso")
     anio = forms.DateField(label="Año")
+    
+class NuevoPosteo(forms.Form):
+    titulo = forms.CharField(max_length=200, label="Título")
+    contenido = forms.CharField(widget=forms.Textarea, label="Texto")
+    imagen = forms.ImageField(label="Imagen", required=False)
+    #fecha = forms.DateField(label="Fecha")
+    autor = forms.CharField(max_length=50)
+    
 
 #formulario de registro
 class UserRegisterForm(UserCreationForm):

@@ -1,5 +1,6 @@
 {% load static %}
 
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -31,7 +32,7 @@
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'index' %}">Inicio</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'acerca' %}">Acerca</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'cursos' %}">Cursos</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'posts' %}">Posts</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'posteos' %}">Posteos</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'cv' %}">CV</a></li>
                         {% if user.is_authenticated %}
                             <!-- <img class="rounded" src="{{url}}" alt="" srcset="" style="height: 40px;"> -->
@@ -57,76 +58,67 @@
                         <div class="site-heading">
                             <h1>Posteos</h1>
                             <h2></h2>
-                            <span class="subheading">Ciencia de datos y Aprendizaje automático</span>
+                            <span class="subheading">Mis Posteos van aca</span>
                         </div>
                     </div>
                 </div>
             </div>
         </header>
         <!-- Main Content-->
-        <div class="container px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5 justify-content-center">
-                <div class="col-md-10 col-lg-8 col-xl-7">
-                    <!-- Post preview-->
-                    <div class="post-preview">
-                        <a href="{% url 'post' %}">
-                            <h2 class="post-title">Man must explore, and this is exploration at its greatest</h2>
-                            <h3 class="post-subtitle">Problems look mighty small from 150 miles up</h3>
-                        </a>
-                        <p class="post-meta">
-                            Posted by
-                            <a href="#!">Start Bootstrap</a>
-                            on September 24, 2022
-                        </p>
+        <main class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <p>Búsqueda por Título:</p>
+                        <div class="row gx-5 justify-content-center">
+                            <div class="col-lg-12">
+                                <form class="d-flex my-2 my-lg-0" action="" method="post">
+                                    {% csrf_token %}
+                                    <input class="flex-grow-0 form-control mr-sm-2" type="search" name="search" placeholder="Buscar por curso/año" aria-label="Search">
+                                    <button class="btn btn-outline-success text-nowrap ms-3 my-2 my-sm-0" type="submit"> <i class="bi bi-search"></i> Buscar</button>
+                                    <a class="btn btn-outline-success text-nowrap ms-3 my-2 my-sm-0" href="{% url 'agregar_posteo' %}"> <i class="bi bi-plus-lg"></i> Agregar Posteo</a>
+                                </form>
+                            </div>
+                        </div>
+                        <br>
+                        <h5>Resultados
+                            {% if search %}
+                                para "{{busqueda}}":
+                            {% else %}
+                                totales:
+                            {% endif %}
+                        </h5>
+                        <br>
+                        <div class="row gx-5 justify-content-center">
+                            <div class="col-lg-10 table-responsive">
+                                <table class="table table-theme">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Post</th>
+                                            <th scope="col">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for posteo in posteos %}
+                                            <tr>
+                                                <th scope="row">{{forloop.counter}}</th>
+                                                <td>{{posteo.titulo}}</td>
+                                                <td>{{posteo.autor}}</td>
+                                                <td>
+                                                    <a href="{% url 'editar_posteo' posteo.id %}" class="text-primary badge badge-primary text-decoration-none"> <i class="bi bi-pencil-square"></i> Editar</a>
+                                                    <a href="{% url 'eliminar_posteo' posteo.id %}" class="text-danger badge badge-danger text-decoration-none"> <i class="bi bi-x-square"></i> Eliminar</a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
-                    <!-- Divider-->
-                    <hr class="my-4" />
-                    <!-- Post preview-->
-                    <div class="post-preview">
-                        <a href="{% url 'post2' %}"><h2 class="post-title">I believe every human has a finite number of heartbeats. I don't intend to waste any of mine.</h2></a>
-                        <p class="post-meta">
-                            Posted by
-                            <a href="#!">Start Bootstrap</a>
-                            on September 18, 2022
-                        </p>
-                    </div>
-                    <!-- Divider-->
-                    <hr class="my-4" />
-                    <!-- Post preview-->
-                    <div class="post-preview">
-                        <a href="{% url 'post3' %}">
-                            <h2 class="post-title">Science has not yet mastered prophecy</h2>
-                            <h3 class="post-subtitle">We predict too much for the next year and yet far too little for the next ten.</h3>
-                        </a>
-                        <p class="post-meta">
-                            Posted by
-                            <a href="#!">Start Bootstrap</a>
-                            on August 24, 2022
-                        </p>
-                    </div>
-                    <!-- Divider-->
-                    <hr class="my-4" />
-                    <!-- Post preview-->
-                    <div class="post-preview">
-                        <a href="{% url 'post4' %}">
-                            <h2 class="post-title">Failure is not an option</h2>
-                            <h3 class="post-subtitle">Many say exploration is part of our destiny, but it’s actually our duty to future generations.</h3>
-                        </a>
-                        <p class="post-meta">
-                            Posted by
-                            <a href="#!">Start Bootstrap</a>
-                            on July 8, 2022
-                        </p>
-                    </div>
-                    <!-- Divider-->
-                    <hr class="my-4" />
-                    <!-- Pager-->
-                    {% comment %}
-                    <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>
-                    {% endcomment %}
                 </div>
             </div>
-        </div>
+        </main>        
         <!-- Footer-->
         <footer class="border-top">
             <div class="container px-4 px-lg-5">
@@ -161,3 +153,5 @@
         <script src="{% static 'js/scripts.js' %}"></script>
     </body>
 </html>
+
+        

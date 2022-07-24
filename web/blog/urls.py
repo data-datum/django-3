@@ -16,15 +16,13 @@ urlpatterns = [
     path('agregar_curso/', agregar_curso, name="agregar_curso"),
     path('eliminar_curso/<curso_id>/', eliminar_curso, name="eliminar_curso"),
     path('editar_curso/<curso_id>/', editar_curso, name="editar_curso"),
+    
+    path('posteos/', posteos, name="posteos"), 
+    path('agregar_posteo/', agregar_posteo, name="agregar_posteo"), 
+    path('eliminar_posteo/<posteo_id>/', eliminar_posteo, name="eliminar_posteo"),
+    path('editar_posteo/<posteo_id>/', editar_posteo, name="editar_posteo"),
 
     path('cv/', cv, name="cv"),
     path('acerca/', acerca, name="acerca"),
-    path('base/', base, name="base"),
-    path('base2/', base2, name="base2"),
-    path('base4/', base4, name="base4"),
-    path('posts/', posts, name="posts"),
-    path('post', post, name="post"),
-    path('post2', post2, name="post2"),
-    path('post3', post3, name="post3"),
-    path('post4', post4, name="post4"),
+    
 ]

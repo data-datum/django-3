@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
+
 
 
 # Create your models here.
@@ -28,6 +30,15 @@ class workshops(models.Model):
     class Meta:
         verbose_name_plural = "Workshops"
 
+class Posteo(models.Model):
+    titulo = models.CharField("Título", max_length=200, blank=True, null=True)
+    contenido = models.TextField("Contenido", blank=True, null=True)
+    imagen = models.ImageField("Imagen", upload_to="blog_img/", blank=True, null=True)
+    #fecha = models.DateTimeField(default=timezone.now)
+    autor = models.CharField(max_length=50, blank=True, null=True)
+   
+    def __str__(self):
+        return f"Título: {self.titulo}"
 
 # modelo del avatar
 class Avatar(models.Model):

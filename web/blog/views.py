@@ -213,6 +213,16 @@ def editar_curso(request,curso_id):
 
 
 @staff_member_required
+def eliminar_curso(request, curso_id):
+
+    # post
+    curso = cursos_dictados.objects.get(id=curso_id)
+    curso.delete()
+
+    return redirect("cursos")
+
+
+@staff_member_required
 def agregar_workshop(request):
 
     if request.method == "POST":
@@ -233,6 +243,104 @@ def agregar_workshop(request):
 
 
 
+def posteos(request):
+    
+    if request.method == "POST":
+
+        search = request.POST["search"]
+
+        if search !="":
+            posteos = Posteo.objects.filter( Q(titulo__icontains=search) | Q(autor__icontains=search)).values()
+
+            return render(request, "blog/posteos.html", {"posteos":posteos, "search":True, "busqueda":search})
+  
+
+    posteos = Posteo.objects.all()
+    
+    return render(request, "blog/posteos.html", {"posteos":posteos})
+
+
+@staff_member_required
+def agregar_posteo(request):
+    
+    try:
+        avatar=Avatar.objects.get(usuario=request.user)
+        url=avatar.imagen.url
+    except:
+        url= "media/avatar/generica.jpg"
+
+    if request.method == "GET":
+        formulariovacio = NuevoPosteo()
+        return render(request, "blog/agregar_posteo.html", {"form":formulariovacio, "url":url})
+
+    elif request.method == "POST":
+        
+        formulario=NuevoPosteo(request.POST, request.FILES)
+
+        if formulario.is_valid():
+
+            info_formulario=formulario.cleaned_data
+
+            posteos = Posteo(titulo=info_formulario["Titulo"],
+                             contenido=info_formulario["Contenido"], 
+                             imagen=info_formulario["Imagen"],
+                             autor=info_formulario["Autor"])
+            posteos.save()
+            return redirect("posteos")
+
+        else: #get
+        
+            return redirect("posteos")
+    else:
+
+        return render(request, "blog/agregar_posteo.html", {"url":url})
+
+
+@staff_member_required
+def editar_posteo(request, posteo_id):
+
+    posteo = Posteo.objects.get(id=posteo_id)
+
+    if request.method == "POST":
+        formulario = NuevoPosteo(request.POST)
+
+        if formulario.is_valid():
+
+            info_posteo = formulario.cleaned_data
+
+            posteo.titulo = info_posteo["Título"]
+            posteo.contenido=info_posteo["Contenido"]
+            posteo.imagen=info_posteo["Imagen"]
+            posteo.autor = info_posteo["Autor"]
+            
+            posteo.save() # guardamos
+
+            return redirect("posteos")
+        
+        else:
+            print(formulario.errors)
+            return render(request, "blog/agregar_posteo.html", {"form":formulario})
+
+
+    #get
+    formulario_vacio=NuevoPosteo(initial={"título":posteo.titulo, 
+                                    "contenido": posteo.contenido, 
+                                    "imagen":posteo.imagen, 
+                                    "autor":posteo.autor})
+    return render(request, "blog/agregar_posteo.html", {"form": formulario_vacio})
+
+
+@staff_member_required
+def eliminar_posteo(request, posteo_id):
+
+    # post
+    posteo = Posteo.objects.get(id=posteo_id)
+    posteo.delete()
+
+    return redirect("posteos")
+
+
+
 def cv(request):
     #return HttpResponse('aca va mi CV')
     return render(request, "blog/cv.html", {})
@@ -241,35 +349,6 @@ def acerca(request):
     #return HttpResponse('aca va info acerca de mi')
     return render(request, "blog/acerca.html", {})
 
-def base(request):
-    
-    return render(request, "blog/base.html", {})
 
-def base2(request):
-    
-    return render(request, "blog/base2.html", {})
 
-def base4(request):
-    
-    return render(request, "blog/base4.html", {})
-  
 
-def posts(request):
-
-    return render(request, "blog/posts.html", {})
-
-def post(request):
-
-    return render(request, "blog/post.html", {})
-
-def post2(request):
-
-    return render(request, "blog/post2.html", {})
-
-def post3(request):
-
-    return render(request, "blog/post3.html", {})
-
-def post4(request):
-
-    return render(request, "blog/post4.html", {})
