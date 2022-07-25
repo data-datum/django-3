@@ -302,7 +302,7 @@ def editar_posteo(request, posteo_id):
     posteo = Posteo.objects.get(id=posteo_id)
 
     if request.method == "POST":
-        formulario = NuevoPosteo(request.POST)
+        formulario = NuevoPosteo(request.POST, request.FILES)
 
         if formulario.is_valid():
 

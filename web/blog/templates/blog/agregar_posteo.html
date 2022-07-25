@@ -31,7 +31,7 @@
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'index' %}">Inicio</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'acerca' %}">Acerca</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'cursos' %}">Cursos</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'post' %}">Post</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'posteos' %}">Posteos</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'cv' %}">CV</a></li>
                     </ul>
                 </div>
@@ -57,16 +57,16 @@
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <h2>Agregar/Modificar un posteo</h2>
                         <p>En esta pagina agrego/modifico los posteos que he creado</p>
-                        <form action="" method="post" enctype="multipart/form-data">
+                        <form action="" method="post" enctype="multipart/form-data" class="text-center">
                             {% csrf_token %}
 
-                            <p>Titulo: <input type="text" name="Titulo" id=""></p>
+                            <p>Titulo: <input type="text" name="Titulo" placeholder="Título"></p>
 
-                            <p>Contenido: <input type="text" name="Contenido" id=""></p>
+                            <p>Contenido: <input type="text" name="Contenido" placeholder="Contenido"></p>
                             
-                            <p>Imagen: <input type="image" name="Imagen" id=""></p>
+                            <p>Imagen: {{form.imagen}}</p>
                             
-                            <p>Autor: <input type="text" name="Autor" id=""></p>
+                            <p>Autor: {{user}}</p>
 
                             <input type="submit" class="btn btn-primary" value="Guardar">
                         </form>
